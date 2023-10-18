@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="vino">#7e0808</color>
+    <color name="greywithalpha">#33000000</color>
 </resources>

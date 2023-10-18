@@ -58,7 +58,7 @@
             android:layout_height="40dp"
             app:layout_constraintStart_toStartOf="@id/img_tapa"
             app:layout_constraintTop_toTopOf="@id/img_tapa"
-            android:background="@color/white"
+            android:background="@color/greywithalpha"
             android:layout_margin="10dp">
 
             <TextView
