@@ -19,7 +19,7 @@ class TapaViewModel (private val getTapaUseCase: GetTapaUseCase):ViewModel(){
     fun loadTapa(){
         _uiState.value= UiState(isLoading = true)
         viewModelScope.launch(Dispatchers.IO){
-            delay(5000)
+            //delay(5000)
             getTapaUseCase().fold(
                 {responseError(it)},
                 {responseGetTapaSuccess(it)}
@@ -28,7 +28,7 @@ class TapaViewModel (private val getTapaUseCase: GetTapaUseCase):ViewModel(){
     }
 
     private fun responseGetTapaSuccess(tapa: List<Tapa>) {
-        _uiState.postValue(UiState(tapa=tapa, isLoading = false))
+        _uiState.postValue(UiState(tapas=tapa, isLoading = false))
     }
 
     private fun responseError(errorApp: ErrorApp) {
@@ -38,7 +38,7 @@ class TapaViewModel (private val getTapaUseCase: GetTapaUseCase):ViewModel(){
 
     data class UiState(val errorApp :ErrorApp?=null,
                        val isLoading: Boolean=false,
-                       val tapa:List<Tapa>?=null
+                       val tapas:List<Tapa>?=null
     )
 
 }
