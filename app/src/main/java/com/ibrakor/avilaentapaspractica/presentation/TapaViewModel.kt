@@ -19,7 +19,7 @@ class TapaViewModel (private val getTapaUseCase: GetTapaUseCase):ViewModel(){
     fun loadTapa(){
         _uiState.value= UiState(isLoading = true)
         viewModelScope.launch(Dispatchers.IO){
-            //delay(5000)
+            delay(2000)
             getTapaUseCase().fold(
                 {responseError(it)},
                 {responseGetTapaSuccess(it)}
