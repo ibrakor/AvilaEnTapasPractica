@@ -3,4 +3,6 @@
     <string name="label_total">Total:</string>
     <string name="label_points">Ptos.</string>
     <string name="label_average">Media:</string>
+    <string name="tapas">Tapas</string>
+    <string name="unknown_error">Error desconocido</string>
 </resources>

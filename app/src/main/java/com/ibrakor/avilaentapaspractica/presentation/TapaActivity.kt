@@ -1,11 +1,16 @@
 package com.ibrakor.avilaentapaspractica.presentation
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.example.avilaentapaspractica.R
 import com.example.avilaentapaspractica.databinding.ActivityTapasavilaBinding
+import com.google.android.material.snackbar.Snackbar
 import com.ibrakor.avilaentapaspractica.app.ErrorApp
+import com.ibrakor.avilaentapaspractica.app.extensions.hide
 import com.ibrakor.avilaentapaspractica.app.extensions.setUrl
+import com.ibrakor.avilaentapaspractica.app.extensions.visible
 import com.ibrakor.avilaentapaspractica.app.serialization.GsonSerialization
 import com.ibrakor.avilaentapaspractica.data.TapaDataRepository
 import com.ibrakor.avilaentapaspractica.data.local.TapaXmlLocalDataSource
@@ -40,9 +45,10 @@ class TapaActivity : AppCompatActivity() {
         val observer= Observer<TapaViewModel.UiState>{
             if(it.isLoading){
                 showLoading()
+                Snackbar.make(binding.root, "Loading...", Snackbar.LENGTH_SHORT).show()
             }
             else{
-
+                hideLoading()
             }
             it.errorApp?.apply {
                 showError(this)
@@ -54,15 +60,21 @@ class TapaActivity : AppCompatActivity() {
         viewModels.uiState.observe(this,observer)
     }
 
-    private fun showLoading() {
-
+    private fun hideLoading() {
+        binding.skeletonLayout.showOriginal()
     }
+
+    private fun showLoading() {
+        binding.skeletonLayout.showSkeleton()
+    }
+
+
 
     private fun bindData(tapas: List<Tapa>) {
          binding.apply {
-         val tapa = tapas.get(0)
+         val tapa = tapas[0]
              imgTapa.setUrl(tapa.imageUrl)
-             tapasTitle.text=tapa.name
+             tapaNam.text=tapa.name
              tapaDescription.text=tapa.description
              resultPoints.text=tapa.point.toString()
              resultAverage.text=tapa.average.toString()
@@ -70,7 +82,9 @@ class TapaActivity : AppCompatActivity() {
     }
 
     private fun showError(errorApp: ErrorApp) {
-
+        binding.viewError.layoutError.visible()
+        binding.constraintTapa.hide()
+        binding.viewError.messageError.text=getString(R.string.unknown_error)
     }
 
 }
