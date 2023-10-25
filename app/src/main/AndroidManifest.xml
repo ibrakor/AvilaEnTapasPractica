@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AvilaEnTapasPractica"
         tools:targetApi="31">
         <activity
+            android:name="com.ibrakor.avilaentapaspractica.presentation.TapaActivityV2"
+            android:exported="false" />
+        <activity
             android:name="com.ibrakor.avilaentapaspractica.presentation.TapaActivity"
             android:exported="true" />
         <activity
